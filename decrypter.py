@@ -22,10 +22,9 @@ def decrypt_content(
 
     if data:
         key_idx = 0
-        key_len = len(key)
         for data_idx in range(len(data)):
             if (data_idx & 1) != 0:
-                key_idx = (key[key_idx] + data_idx + key_idx) & (key_len - 1)
+                key_idx = (key[key_idx] + data_idx + key_idx) % len(key)
                 data[data_idx] = key[key_idx] ^ (~data[data_idx] & 0xFF)
 
     return data
